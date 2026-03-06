@@ -143,11 +143,11 @@
     /* ── EXPERIENCE ── */
     #experience { background: var(--surface); }
     .timeline { display: flex; flex-direction: column; max-width: 700px; }
-    .timeline-item { display: grid; grid-template-columns: 136px 1fr; gap: 1.8rem; position: relative; padding-bottom: 2rem; }
-    .timeline-item:not(:last-child)::after { content: ''; position: absolute; left: 135px; top: 22px; bottom: 0; width: 1px; background: var(--subtle); }
-    .timeline-date { font-size: 0.74rem; color: var(--muted); font-weight: 500; padding-top: 2px; text-align: right; }
-    .timeline-dot { position: absolute; left: 128px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--accent); }
-    .timeline-body { padding-left: 0.9rem; }
+    .timeline-item { display: grid; grid-template-columns: 130px 28px 1fr; gap: 0 0.8rem; align-items: start; padding-bottom: 2rem; position: relative; }
+    .timeline-item:not(:last-child)::after { content: ''; position: absolute; left: 151px; top: 20px; bottom: 0; width: 1px; background: var(--subtle); z-index: 0; }
+    .timeline-date { font-size: 0.74rem; color: var(--muted); font-weight: 500; padding-top: 3px; text-align: right; }
+    .timeline-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--surface); box-shadow: 0 0 0 2px var(--accent); margin: 3px auto 0; position: relative; z-index: 1; display: block; flex-shrink: 0; }
+    .timeline-body { padding-left: 0; }
     .timeline-body h3 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.1rem; }
     .timeline-body .org { font-size: 0.79rem; color: var(--accent); font-weight: 600; margin-bottom: 0.45rem; }
     .timeline-body p { font-size: 0.81rem; color: var(--muted); line-height: 1.65; }
@@ -181,7 +181,7 @@
     footer a:hover { color: rgba(255,255,255,0.6); }
 
     /* ── ANIMATIONS ── */
-    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+    .fade-in { opacity: 1; transform: translateY(0); transition: opacity 0.55s ease, transform 0.55s ease; }
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ── TABLET (768–1100px) ── */
@@ -204,7 +204,7 @@
       .services-grid { grid-template-columns: 1fr; gap: 0.9rem; }
       .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
       .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
-      .timeline-item { grid-template-columns: 1fr; gap: 0.3rem; padding-bottom: 1.8rem; }
+      .timeline-item { grid-template-columns: 1fr; gap: 0.2rem; padding-bottom: 1.8rem; }
       .timeline-date { text-align: left; }
       .timeline-item::after, .timeline-dot { display: none; }
       .timeline-body { padding-left: 0; }
@@ -420,7 +420,7 @@
         <h2 class="section-title">Let's build quality<br>software together.</h2>
         <p class="section-sub">Available for freelance projects, consulting, and contract work. Eligible to work in the Czech Republic. Remote-friendly.</p>
         <div class="contact-buttons">
-          <a href="mailto:tdramashko@gmail.com" class="contact-btn">
+          <a href="/cdn-cgi/l/email-protection#5a2e3e283b373b293231351a3d373b333674393537" class="contact-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
             Email
           </a>
@@ -481,14 +481,14 @@
 <footer>
   <div class="footer-inner">
     <span>© 2026 Tetiana Dramashko · Test Automation Engineer · Brno, CZ</span>
-    <span><a href="mailto:tdramashko@gmail.com">tdramashko@gmail.com</a></span>
+    <span><a href="/cdn-cgi/l/email-protection#b2c6d6c0d3dfd3c1dad9ddf2d5dfd3dbde9cd1dddf"><span class="__cf_email__" data-cfemail="1e6a7a6c7f737f6d7675715e79737f7772307d7173">[email&#160;protected]</span></a></span>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.1 });
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.05, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
   function submitForm() {
@@ -498,11 +498,4 @@
     const msg = document.getElementById('fmsg').value.trim();
     if (!name || !email || !msg) { alert('Please fill in your name, email, and message.'); return; }
     const subject = encodeURIComponent(`Freelance Inquiry: ${type || 'Project'}`);
-    const body = encodeURIComponent(`Hi Tetiana,\n\nName: ${name}\nEmail: ${email}\nService: ${type}\n\n${msg}`);
-    window.location.href = `mailto:tdramashko@gmail.com?subject=${subject}&body=${body}`;
-    document.getElementById('contact-form').style.display = 'none';
-    document.getElementById('form-success').style.display = 'block';
-  }
-</script>
-</body>
-</html>
+    const body = encodeURIComponent(`Hi Tetiana,\n\nName: ${name}\nEmail: ${email}\
