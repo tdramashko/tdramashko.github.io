@@ -120,7 +120,9 @@
     if (document.getElementById('td-ls-en')) return;
     var nav = document.querySelector('nav[aria-label="Main navigation"]');
     if (!nav) return;
-    var cta = nav.querySelector('a[href="#contact"]');
+    // Pick the last a[href="#contact"] — the direct-child CTA, not the nav link inside the links div
+    var allCta = nav.querySelectorAll('a[href="#contact"]');
+    var cta = allCta.length ? allCta[allCta.length - 1] : null;
     var sw = document.createElement('div');
     sw.setAttribute('data-ls', '1');
     sw.className = 'hidden md:flex items-center gap-1 shrink-0';
